@@ -1,22 +1,18 @@
 import { Router } from 'express';
-import {addBook, createUserAdministrator, readBooks, testAddData, testTransferData} from '../controllers/controller.library';
+import { showListBooks } from '../controllers/controller.user.client';
+import { createCustomer } from '../controllers/constroller.user.Admin';
+
 
 
 const router = Router();
 
 
-router.get('/home', testTransferData);
+
+router.get('/showListBooks', showListBooks);
 
 
+router.post('/createNewCustomer', createCustomer);
 
-router.post('/addUser', testAddData);
-
-router.post('/newBook', addBook);
-
-
-router.post('/newAdministrator', createUserAdministrator);
-
-router.get('/readListBooks', readBooks);
 
 
 
