@@ -1,5 +1,5 @@
 
 
 export const  generateId = () : number   =>  {
-    return Math.floor( Math.random() * (100 - 5000) + 100); 
+    return Math.floor(Math.random() * (5000 - 100)+ 100); 
 }; 

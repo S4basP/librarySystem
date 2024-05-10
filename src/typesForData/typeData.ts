@@ -16,14 +16,14 @@ export type Administrator = {
   password: string;
 };
 
-export type Customer = {
-  id_Customer: string,
+export type CustomerRegister = {
+  id_Customer: number,
   name: string,
   date_Birth: string,
   address: string,
-  registration_Date: string,
-  debt: number,
-  lend:  boolean 
+  email: string,
+  registration_Date: string
+
 
 }
 
