@@ -202,3 +202,8 @@ export const loanBook: RequestHandler = async (req, res) => {
     });
   }
 };
+
+
+export const loginAutenticationAdmin: RequestHandler = ( req, res ) => {
+ 
+}
