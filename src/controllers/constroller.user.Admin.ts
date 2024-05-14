@@ -1,7 +1,53 @@
 import { RequestHandler } from "express";
 import { poolAdministrator } from "../db/db";
 import { generateId } from "../typesForData/ids";
-import { CustomerRegister, Books, loan_Book } from "../typesForData/typeData";
+import {
+  CustomerRegister,
+  Books,
+  loan_Book,
+  Administrator,
+} from "../typesForData/typeData";
+import { genSalt, hash } from "bcryptjs";
+
+export const createAdministrator: RequestHandler = async (req, res) => {
+  let { name, age, schedule, password } = req.body;
+  let salt = await genSalt(5);
+  password = await hash(password, salt);
+  let newAdministrator: Administrator = {
+    id_Adminitrator: generateId(),
+    name: name,
+    age: age,
+    schedule: schedule,
+    password: password,
+  };
+  try {
+    if (!name || !age || !schedule || !password) {
+      return res.status(404).send({
+        status: "Error_Data_Empty",
+        message: "Error data empty",
+      });
+    } else {
+        await poolAdministrator.query('insert into administrator (id_Administrator, name, age, schedule, password) value  ( ?, ?, ?, ?, ? )', [
+            newAdministrator.id_Adminitrator,
+            newAdministrator.name,
+            newAdministrator.age,
+            newAdministrator.schedule,
+            newAdministrator.password,
+        ]);
+
+        console.log(newAdministrator);
+      return res.status(200).send({
+        status: "ok",
+        message: "Administartor added",
+      });
+    }
+  } catch (error) {
+    return res.status(500).send({
+      status: "Error_Connectio_DataBases",
+      error,
+    });
+  }
+};
 
 export const createCustomer: RequestHandler = async (req, res) => {
   let { name, date_Birth, address, email, registration_Date } = req.body;
@@ -95,14 +141,13 @@ export const createBooks: RequestHandler = async (req, res) => {
 
 export const loanBook: RequestHandler = async (req, res) => {
   const {
-    
     id_Books,
     id_Customer,
     id_Administartor: id_Administrator,
     delivery_Date,
     loan_Date,
     loan_Payment,
-    loan_delay_cost
+    loan_delay_cost,
   } = req.body;
 
   const newLoan: loan_Book = {
@@ -113,38 +158,47 @@ export const loanBook: RequestHandler = async (req, res) => {
     delivery_Date: delivery_Date,
     loan_Date: loan_Date,
     loan_Payment: loan_Payment,
-    loan_delay_cost: loan_delay_cost
+    loan_delay_cost: loan_delay_cost,
   };
 
   try {
-    if( !id_Books || !id_Customer || !id_Administrator || !delivery_Date ||!loan_Date || !loan_Payment || !loan_delay_cost ){
-        return res.status(404).send({
-            status: "error_Data_empty",
-            message:"Error data empy!!!"
-        });
+    if (
+      !id_Books ||
+      !id_Customer ||
+      !id_Administrator ||
+      !delivery_Date ||
+      !loan_Date ||
+      !loan_Payment ||
+      !loan_delay_cost
+    ) {
+      return res.status(404).send({
+        status: "error_Data_empty",
+        message: "Error data empy!!!",
+      });
     } else {
-        await poolAdministrator.query('insert into loan ( id_Loan, id_Books, id_Customer, id_Administrator, delivery_Date,loan_Date, loan_Payment, loan_delay_cost ) values ( ?, ?, ?, ?, ?, ?, ?, ? )', [
-            newLoan.id_Loan,
-            newLoan.id_Books,
-            newLoan.id_Customer,
-            newLoan.id_Administrator,
-            newLoan.delivery_Date,
-            newLoan.loan_Date,
-            newLoan.loan_Payment,
-            newLoan.loan_delay_cost
-        ]);
-        console.log(newLoan);        
-        return res.status(200).send({
-            status: "ok",
-            message: "loan accepted"
-        })
+      await poolAdministrator.query(
+        "insert into loan ( id_Loan, id_Books, id_Customer, id_Administrator, delivery_Date,loan_Date, loan_Payment, loan_delay_cost ) values ( ?, ?, ?, ?, ?, ?, ?, ? )",
+        [
+          newLoan.id_Loan,
+          newLoan.id_Books,
+          newLoan.id_Customer,
+          newLoan.id_Administrator,
+          newLoan.delivery_Date,
+          newLoan.loan_Date,
+          newLoan.loan_Payment,
+          newLoan.loan_delay_cost,
+        ]
+      );
+      console.log(newLoan);
+      return res.status(200).send({
+        status: "ok",
+        message: "loan accepted",
+      });
     }
   } catch (error) {
-
     return res.status(500).send({
-        status: "Error_connection_Databases",
-        error
-    })
-    
+      status: "Error_connection_Databases",
+      error,
+    });
   }
 };
