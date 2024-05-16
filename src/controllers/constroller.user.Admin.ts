@@ -204,6 +204,19 @@ export const loanBook: RequestHandler = async (req, res) => {
 };
 
 
-export const loginAutenticationAdmin: RequestHandler = ( req, res ) => {
- 
+export const loginAutenticationAdmin: RequestHandler = async ( req, res ) => {
+  const { name } = req.body;
+  try {
+    let [rows] : any = await poolAdministrator.query('select password from administrator where  ? = name', [name]);
+    res.status(200).send({
+      status: "ok",
+      rows
+    });
+  } catch (error) {
+  return res.status(500).send({
+    status: "error_DataBase_connection",
+    message: "Erro databases connection"
+  });   
+  }
+
 }

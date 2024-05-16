@@ -1,6 +1,7 @@
 import express, { json } from 'express';
 import morgan from 'morgan';
 import indexRouters from './routers/index.routers';
+
 //
 const app = express();
 
@@ -9,6 +10,8 @@ const app = express();
 app.use(morgan('dev'));
 app.use(express.json())
 app.use(indexRouters);
+
+
 
 
 
