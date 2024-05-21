@@ -7,7 +7,8 @@ import {
   loan_Book,
   Administrator,
 } from "../typesForData/typeData";
-import { genSalt, hash } from "bcryptjs";
+import { compare, genSalt, hash } from "bcryptjs";
+import { compareAdmin } from "./data.collection.controll";
 
 export const createAdministrator: RequestHandler = async (req, res) => {
   let { name, age, schedule, password } = req.body;
@@ -205,18 +206,21 @@ export const loanBook: RequestHandler = async (req, res) => {
 
 
 export const loginAutenticationAdmin: RequestHandler = async ( req, res ) => {
-  const { name } = req.body;
-  try {
-    let [rows] : any = await poolAdministrator.query('select password from administrator where  ? = name', [name]);
-    res.status(200).send({
-      status: "ok",
-      rows
-    });
-  } catch (error) {
-  return res.status(500).send({
-    status: "error_DataBase_connection",
-    message: "Erro databases connection"
-  });   
+  const { name, password } = req.body;
+  let resultOfCompare = await compareAdmin( name, password );
+  if( !name || !password ){
+    return res.status(404).send({
+      status: "error_Data_empty",
+      message: "send data empty"
+    })
+  } else {
+    if(resultOfCompare.status === 202){
+      return res.status(resultOfCompare.status).send(resultOfCompare);
+    } else {
+      return res.status(resultOfCompare.status).send(resultOfCompare);
+    }
   }
+ 
+
 
 }

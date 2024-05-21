@@ -8,17 +8,23 @@ import { createAdministrator, createBooks, createCustomer, loanBook, loginAutent
 const router = Router();
 
 
-
+//show books 
 router.get('/showListBooks', showListBooks);
 
+//create new administrator 
 router.post('/newAdministrator', createAdministrator);
 
+//Create new customer 
 router.post('/createNewCustomer', createCustomer);
 
+//Create new books
 router.post('/createNewBooks', createBooks);
 
+//loan Books
 router.post('/loanBook', loanBook);
 
+
+//Login adminitrator 
 router.post('/login', loginAutenticationAdmin);
 
 
