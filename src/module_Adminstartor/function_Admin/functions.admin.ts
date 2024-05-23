@@ -1,4 +1,4 @@
-import { poolAdministrator } from "../db/db"
+import { poolAdministrator } from "../../db/db"
 import { compare } from "bcryptjs";
 
 

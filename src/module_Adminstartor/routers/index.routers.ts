@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import { showListBooks } from '../controllers/controller.user.client';
+import { showListBooks } from '../../module_Client/controllers/controller.user.client';
 import { createAdministrator, createBooks, createCustomer, loanBook, loginAutenticationAdmin } from '../controllers/constroller.user.Admin';
 
 
@@ -8,8 +8,6 @@ import { createAdministrator, createBooks, createCustomer, loanBook, loginAutent
 const router = Router();
 
 
-//show books 
-router.get('/showListBooks', showListBooks);
 
 //create new administrator 
 router.post('/newAdministrator', createAdministrator);

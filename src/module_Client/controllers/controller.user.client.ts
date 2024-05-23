@@ -1,5 +1,5 @@
 import { RequestHandler } from "express";
-import { poolClient } from "../db/db";
+import { poolClient } from "../../db/db";
 
 
 

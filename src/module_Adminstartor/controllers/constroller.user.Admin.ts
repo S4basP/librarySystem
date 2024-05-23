@@ -1,14 +1,14 @@
 import { RequestHandler } from "express";
-import { poolAdministrator } from "../db/db";
-import { generateId } from "../typesForData/ids";
+import { poolAdministrator } from "../../db/db";
+import { generateId } from "../../typesForData/ids";
 import {
   CustomerRegister,
   Books,
   loan_Book,
   Administrator,
-} from "../typesForData/typeData";
-import { compare, genSalt, hash } from "bcryptjs";
-import { compareAdmin } from "./data.collection.controll";
+} from "../../typesForData/typeData";
+import { genSalt, hash } from "bcryptjs";
+import { compareAdmin } from '../function_Admin/functions.admin'
 
 export const createAdministrator: RequestHandler = async (req, res) => {
   let { name, age, schedule, password } = req.body;
