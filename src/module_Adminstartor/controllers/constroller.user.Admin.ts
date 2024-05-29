@@ -1,5 +1,4 @@
 import { RequestHandler } from "express";
-import { poolAdministrator } from "../../db/db";
 import { generateId } from "../../typesForData/ids";
 import {
   CustomerRegister,
@@ -7,13 +6,17 @@ import {
   loan_Book,
   Administrator,
 } from "../../typesForData/typeData";
-import { genSalt, hash } from "bcryptjs";
-import { compareAdmin } from '../function_Admin/functions.admin'
+import { addAdminToDataBases, compareAdmin } from '../function_Admin/f.addedAdmin'
+import { addCustomerDataBase } from "../function_Admin/f.addCustomer";
+import { addBookDataBases } from "../function_Admin/f.addBooks";
+import { addLoanDataBase } from "../function_Admin/f.addLoan";
+
+
+let data; 
+
 
 export const createAdministrator: RequestHandler = async (req, res) => {
   let { name, age, schedule, password } = req.body;
-  let salt = await genSalt(5);
-  password = await hash(password, salt);
   let newAdministrator: Administrator = {
     id_Adminitrator: generateId(),
     name: name,
@@ -21,33 +24,9 @@ export const createAdministrator: RequestHandler = async (req, res) => {
     schedule: schedule,
     password: password,
   };
-  try {
-    if (!name || !age || !schedule || !password) {
-      return res.status(404).send({
-        status: "Error_Data_Empty",
-        message: "Error data empty",
-      });
-    } else {
-        await poolAdministrator.query('insert into administrator (id_Administrator, name, age, schedule, password) value  ( ?, ?, ?, ?, ? )', [
-            newAdministrator.id_Adminitrator,
-            newAdministrator.name,
-            newAdministrator.age,
-            newAdministrator.schedule,
-            newAdministrator.password,
-        ]);
+  data = await addAdminToDataBases(newAdministrator);
 
-        console.log(newAdministrator);
-      return res.status(200).send({
-        status: "ok",
-        message: "Administartor added",
-      });
-    }
-  } catch (error) {
-    return res.status(500).send({
-      status: "Error_Connectio_DataBases",
-      error,
-    });
-  }
+  return res.status(data.status).send(data);
 };
 
 export const createCustomer: RequestHandler = async (req, res) => {
@@ -60,39 +39,10 @@ export const createCustomer: RequestHandler = async (req, res) => {
     email: email,
     registration_Date: registration_Date,
   };
+  data = await addCustomerDataBase(newCustomer);
 
-  try {
-    if (!name || !date_Birth || !address || !email || !registration_Date) {
-      return res.status(404).send({
-        status: "error",
-        message: "empy data",
-      });
-    } else {
-      await poolAdministrator.query(
-        "insert into customer (id_Customer, name, date_Birth, address, email, registration_Date) value (?, ?, ?, ?, ?, ?)",
-        [
-          newCustomer.id_Customer,
-          newCustomer.name,
-          newCustomer.date_Birth,
-          newCustomer.address,
-          newCustomer.email,
-          newCustomer.registration_Date,
-        ]
-      );
 
-      return res.status(200).send({
-        status: "ok",
-        message: "new customer added",
-        newCustomer,
-      });
-    }
-  } catch (error) {
-    return res.status(500).send({
-      status: "error",
-      message_Server: "Error to connect database",
-      error,
-    });
-  }
+  return res.status(data.status).send(data);
 };
 
 export const createBooks: RequestHandler = async (req, res) => {
@@ -106,38 +56,8 @@ export const createBooks: RequestHandler = async (req, res) => {
     aviable: true,
     loan_price: loan_priece,
   };
-  try {
-    if (!name || !publication_Date || !author || !editorial || !loan_priece) {
-      return res.status(404).send({
-        status: "Error",
-        message: "Data empty",
-      });
-    } else {
-      await poolAdministrator.query(
-        "insert into books ( id_Books, name, publication_Date, author, editorial, aviable, loan_price ) values (?,?,?,?,?,?,?);",
-        [
-          newBook.id_Books,
-          newBook.name,
-          newBook.publication_Date,
-          newBook.author,
-          newBook.editorial,
-          newBook.aviable,
-          newBook.loan_price,
-        ]
-      );
-      return res.status(200).send({
-        status: "ok",
-        message: "book added",
-        newBook,
-      });
-    }
-  } catch (error) {
-    return res.status(500).send({
-      status: "error",
-      message_Server: "Error of connection",
-      error,
-    });
-  }
+   let data = await addBookDataBases(newBook);
+   return res.status(data.status).send(data);
 };
 
 export const loanBook: RequestHandler = async (req, res) => {
@@ -162,65 +82,18 @@ export const loanBook: RequestHandler = async (req, res) => {
     loan_delay_cost: loan_delay_cost,
   };
 
-  try {
-    if (
-      !id_Books ||
-      !id_Customer ||
-      !id_Administrator ||
-      !delivery_Date ||
-      !loan_Date ||
-      !loan_Payment ||
-      !loan_delay_cost
-    ) {
-      return res.status(404).send({
-        status: "error_Data_empty",
-        message: "Error data empy!!!",
-      });
-    } else {
-      await poolAdministrator.query(
-        "insert into loan ( id_Loan, id_Books, id_Customer, id_Administrator, delivery_Date,loan_Date, loan_Payment, loan_delay_cost ) values ( ?, ?, ?, ?, ?, ?, ?, ? )",
-        [
-          newLoan.id_Loan,
-          newLoan.id_Books,
-          newLoan.id_Customer,
-          newLoan.id_Administrator,
-          newLoan.delivery_Date,
-          newLoan.loan_Date,
-          newLoan.loan_Payment,
-          newLoan.loan_delay_cost,
-        ]
-      );
-      console.log(newLoan);
-      return res.status(200).send({
-        status: "ok",
-        message: "loan accepted",
-      });
-    }
-  } catch (error) {
-    return res.status(500).send({
-      status: "Error_connection_Databases",
-      error,
-    });
-  }
+ let data = await addLoanDataBase(newLoan);
+ return res.status(data.status).send(data);
+
 };
 
 
 export const loginAutenticationAdmin: RequestHandler = async ( req, res ) => {
   const { name, password } = req.body;
-  let resultOfCompare = await compareAdmin( name, password );
-  if( !name || !password ){
-    return res.status(404).send({
-      status: "error_Data_empty",
-      message: "send data empty"
-    })
-  } else {
-    if(resultOfCompare.status === 202){
-      return res.status(resultOfCompare.status).send(resultOfCompare);
-    } else {
-      return res.status(resultOfCompare.status).send(resultOfCompare);
-    }
+   data = await compareAdmin( name, password );
+   return res.status(data.status).send(data);
+  
   }
  
 
 
-}
