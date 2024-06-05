@@ -71,7 +71,7 @@ export const compareAdmin: any = async (name: string, password: string) => {
       return {
         status: 202,
         status_Server: "user_Not_Found",
-        band: band,
+        user_Found: band,
         message: "user not found!!",
       };
     } else {
@@ -79,8 +79,9 @@ export const compareAdmin: any = async (name: string, password: string) => {
       return {
         status: 202,
         status_server: "user_Found",
-        band: band,
+        user_Found: band,
         message: "user found!!",
+        redirect: '/home',
       };
     }
   } catch (error) {

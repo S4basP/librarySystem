@@ -1,0 +1,16 @@
+import { RequestHandler } from "express";
+import path from 'path';
+
+
+
+export const indexPage: RequestHandler = (  req , res ) => {
+    
+    return res.status(200).sendFile(path.join(__dirname, '../../public/index.html'));
+};
+
+
+export const pageHome: RequestHandler = ( req, res ) => {
+
+    return res.status(200).sendFile(path.join(__dirname, '../../public/home.html'));
+
+};

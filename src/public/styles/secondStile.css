@@ -1,0 +1,141 @@
+header {
+  background: #000000;
+  position: fixed;
+  top:0px;
+  left: 0px;
+  width: 100%;
+  clear: both;
+  content: "";
+  display: table;
+}
+
+.menu {
+  width: 900px;
+  margin: 0 auto;
+}
+img {
+  width: 40px;
+  height: 40px;
+  float: left;
+  padding: 8px;
+}
+p {
+  color: #f3f0f0;
+  width: 150px;
+  height: 10px;
+  float: left;
+  padding: 8px;
+  font-size: 20px;
+}
+nav {
+  float: right;
+}
+nav ul li {
+  list-style: none;
+  margin-left: 75px;
+  padding: 12px 0;
+  float: left;
+  position: relative;
+}
+nav ul li a {
+  text-decoration: none;
+  color: #f3f0f0;
+  font-weight: bold;
+}
+nav ul li a::before {
+  display: block;
+  content: "";
+  width: 0%;
+  background: #f3f0f0;
+  height: 5px;
+  top: 0;
+  position: absolute;
+  transition: width 0.2s;
+}
+nav ul li a:hover::before {
+  width: 100%;
+}
+
+body {
+  background: lightgoldenrodyellow;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.container {
+  
+  margin-top: 100px;
+  display: flex;
+  justify-content: center;
+  flex-direction: row;
+  width: 1000px;
+  height: 1000px;
+
+  
+}
+
+
+.container-box{
+    
+    margin: 20px;
+}
+
+
+
+.container-box{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    width: 1200px;
+    height: 850px;
+    overflow: auto;
+}
+.box{
+  background: #350a06;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  margin: 20px;
+  width: 200px;
+  height: 250px;
+}
+.container-box::-webkit-scrollbar{
+    display: none;
+}
+
+
+.container-user{
+    display: flex;
+    flex-direction: column;
+    background: #350a06;
+    width: 300px;
+    height: 350px;
+}
+.container-user img{
+ 
+  margin-top: 20px;
+  border-radius: 180px;
+  width: 100px;
+  height: 100px;
+
+}
+.container-user p {
+  overflow: hidden;
+  width: 200px;
+  height: 200px;
+  text-align: justify;
+}
+.container-user ul{
+  text-decoration: none;
+  list-style: none;
+  font-size: 20px;
+  color: white;
+
+}
+
+
+
