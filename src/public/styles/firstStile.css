@@ -66,3 +66,11 @@ form button {
 form button .singIn {
   background-color: #fff;
 }
+
+
+#message {
+  color: red;
+  padding: 2px;
+  text-align: center;
+  display: none;
+}

@@ -6,6 +6,7 @@ import { cLogin } from "./modules/modCleanInputs.js";
 const inpName = document.getElementById('email');
 const inpPass = document.getElementById('pass');
 const btnLogin = document.getElementById('btnLogin');
+const message = document.getElementById('message');
 
 
 
@@ -24,7 +25,9 @@ btnLogin.addEventListener('click', async (e) => {
 
  });
  cLogin(inpName, inpPass);
-   if(data.user_Found === true){
-    window.location.href = data.redirect;
+   if(!data.user_Found){
+    message.style.display = "block";
+   } else  {
+      window.location.href = data.redirect;
    } 
 });

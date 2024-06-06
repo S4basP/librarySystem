@@ -51,7 +51,7 @@ export const addAdminToDataBases = async (newAdmin: Administrator) => {
 };
 
 export const compareAdmin: any = async (name: string, password: string) => {
-  let outObjet;
+  let band;
  if( !name || !password ){
   return {
     status: 404,
@@ -65,26 +65,35 @@ export const compareAdmin: any = async (name: string, password: string) => {
       [name]
     );
 
-    let band = await compare(password, rows[0].password);
+    try{ band = await compare(password, rows[0].password);} catch{ 
+      return {
+        status: 202,
+        status_Server: "user_Not_Found",
+        user_Found: false ,
+        message: "user invalid",
+      }
+     }
+    
 
     if (!band) {
       return {
         status: 202,
         status_Server: "user_Not_Found",
         user_Found: band,
-        message: "user not found!!",
+        message: "password incorrect",
       };
     } else {
-      console.log(`Nam: ${name}\nPassword: ${password}`);
+      console.log(`Name: ${name}\nPassword: ${password}`);
       return {
         status: 202,
         status_server: "user_Found",
         user_Found: band,
-        message: "user found!!",
+        message: "Acces acount",
         redirect: '/home',
       };
     }
   } catch (error) {
+    console.log(error)
     return {
       status: 500,
       status_Server: "Error_to_ConexionDataBases",

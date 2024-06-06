@@ -10,6 +10,7 @@ import { addAdminToDataBases, compareAdmin } from '../function_Admin/f.addedAdmi
 import { addCustomerDataBase } from "../function_Admin/f.addCustomer";
 import { addBookDataBases } from "../function_Admin/f.addBooks";
 import { addLoanDataBase } from "../function_Admin/f.addLoan";
+import { showBooksDataBase } from "../function_Admin/seeData";
 
 
 let data; 
@@ -95,5 +96,9 @@ export const loginAutenticationAdmin: RequestHandler = async ( req, res ) => {
   
   }
  
-
+export const showBooks: RequestHandler = async ( req , res ) => {
+  data = await showBooksDataBase();
+  console.log(data);
+  return res.status(data.status).send(data);
+}
 

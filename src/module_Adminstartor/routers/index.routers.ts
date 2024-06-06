@@ -1,6 +1,6 @@
 import { Router } from 'express';
 import { showListBooks } from '../../module_Client/controllers/controller.user.client';
-import { createAdministrator, createBooks, createCustomer, loanBook, loginAutenticationAdmin } from '../controllers/constroller.user.Admin';
+import { createAdministrator, createBooks, createCustomer, loanBook, loginAutenticationAdmin, showBooks } from '../controllers/constroller.user.Admin';
 
 
 
@@ -24,6 +24,9 @@ router.post('/loanBook', loanBook);
 
 //Login adminitrator 
 router.post('/login', loginAutenticationAdmin);
+
+
+router.get('/showBooks', showBooks)
 
 
 

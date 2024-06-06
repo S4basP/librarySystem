@@ -70,7 +70,7 @@ body {
   display: flex;
   justify-content: center;
   flex-direction: row;
-  width: 1000px;
+  width: 1200px;
   height: 1000px;
 
   
@@ -95,19 +95,25 @@ body {
 }
 .box{
   background: #350a06;
+  color: white;
   display: flex;
   align-items: center;
   justify-content: center;
-  color: white;
-  margin: 20px;
-  width: 200px;
-  height: 250px;
+  flex-direction: column;
+  margin: 10px;
+  width: 300px;
+  height: 350px;
 }
 .container-box::-webkit-scrollbar{
     display: none;
 }
 
+.box img{
+  width:120px;
+  height: 120px;
+}
 
+/* 
 .container-user{
     display: flex;
     flex-direction: column;
@@ -115,7 +121,7 @@ body {
     width: 300px;
     height: 350px;
 }
-.container-user img{
+/* .container-user img{
  
   margin-top: 20px;
   border-radius: 180px;
@@ -135,7 +141,6 @@ body {
   font-size: 20px;
   color: white;
 
-}
-
-
+} */
+ 
 
