@@ -19,12 +19,10 @@ img {
   float: left;
   padding: 8px;
 }
-p {
+p{
   color: #f3f0f0;
   width: 150px;
-  height: 10px;
   float: left;
-  padding: 8px;
   font-size: 20px;
 }
 nav {
@@ -55,7 +53,6 @@ nav ul li a::before {
 nav ul li a:hover::before {
   width: 100%;
 }
-
 body {
   background: lightgoldenrodyellow;
   margin: 0 auto;

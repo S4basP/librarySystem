@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./styles/customerStile.css">
+    <title>Create new customer</title>
+</head>
+<body>
+
+    <header>
+        <div class="menu">
+          <img src="./img/books.png" alt="" />
+          <p>Library System</p>
+          <nav>
+            <ul>
+              <li><a href="/home">Home</a></li>
+              <li><a href="/customerAdded">Add new customer </a></li>
+              <li><a href="">Add new book</a></li>
+              <li><a href="#">Loan book</a></li>
+            </ul>
+          </nav>
+        </div>
+      </header>
+
+
+      <div class="container">
+        <form >
+          <div class = "title-form"><h2>Add new cutomer </h2></div>
+          <div class="inpData">
+            <input type="text" name="" id="name" placeholder="NAME" required>
+            <input type="date" name="" id="date_Birth" required>
+            <input type="text" name="" id="address" placeholder="ADDRESS" required>
+            <input type="email" name="" id="email" placeholder="EMAIL" required>
+
+          </div>
+          <div class="button">
+            <button type="button" id = "button-send">ADD</button>
+          </div>
+        </form>
+      </div>
+
+
+      <div class="modal-container" id = "modal-container">
+        <div class="modal">
+          <h1>Ok!!</h1>
+          <p>customer added 
+            with successful</p>
+          <button id = "button-modal">continue</button>
+        </div>
+
+      </div>
+      <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+      <script type="module" src="js/pCutomer.js"></script>
+
+</body>
+</html>
