@@ -19,3 +19,8 @@ export const pageHome: RequestHandler = ( req, res ) => {
 export const pageCustomer: RequestHandler = ( req, res ) => {
     return res.status(200).sendFile( path.join( __dirname, '../../public/createCustome.html'));
 };
+
+
+export const pageBookAdded : RequestHandler = ( req, res ) => {
+    return res.status(200).sendFile(path.join(__dirname, '../../public/bookAdd.html'));
+}

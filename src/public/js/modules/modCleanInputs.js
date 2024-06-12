@@ -11,7 +11,14 @@ import{
 
 } from './elementsDom.js';
 
+import {
+    inpNameBook,
+    inpPubDateBook,
+    inpAuthorBook,
+    inpEditorialBook,
+    inpLoanPrieceBook,
 
+} from './elementsDom.js';
 
 
 export const cLogin = ( name, password ) => {
@@ -28,3 +35,14 @@ export const cCustomer = (  ) => {
         inpAddress.value  = '';
         inpEmail.value = '';
     };
+
+
+
+
+export const cBooks = () => {
+    inpNameBook.value = "",
+    inpPubDateBook.value = "",
+    inpAuthorBook.value = "",
+    inpEditorialBook.value = "",
+    inpLoanPrieceBook.value = ""
+}

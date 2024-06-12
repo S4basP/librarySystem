@@ -69,7 +69,7 @@ header {
   .container{
     margin-top: 100px;   
     width: 600px;
-    height: 500px;
+    height: 550px;
     background: rgba(255, 240, 201, 0.6);
     border-radius: 5px;
     box-shadow: 5px 5px 15px gray;
@@ -91,7 +91,7 @@ header {
   }
 
   .inpData{
-    margin-top: 20px;
+    margin-top: 10px;
     margin-left: 20px;
     display: flex;
     flex-direction: column;
@@ -114,8 +114,15 @@ header {
     text-align: left;
 
   }
+
+  .inpData label {
+    color: #56070c;
+    margin-left:20px ;
+    font-size: 20px;
+  }
+
   .button {
-    margin-top: 10px;
+    margin-top: 60px;
     margin-left: 20px;
 
     width: 550px;
@@ -124,6 +131,8 @@ header {
     justify-content: center;
   }
   .button button {
+    margin-top: 30px;
+    height: 50px;
     width: 300px;
     color: white;
     background: #56070c;

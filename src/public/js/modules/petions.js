@@ -30,3 +30,25 @@ export const addCustomer = async ( customer )  => {
     }
 
 }
+
+
+
+export const addBook = async ( book ) => {
+
+    let {data} = await axios( {
+        method: 'post',
+        url: 'http://localhost:3000/createNewBooks',
+        data: {
+            name: book.name,
+            publication_Date: book.publication_Date, 
+            author: book.author,
+            editorial: book.editorial,
+            loan_priece: book.loan_priece
+          }
+    } );
+
+    if(data.status_Server ===  'ok'){
+        modalContainer.style.display = 'block';
+    }
+
+};

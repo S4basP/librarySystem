@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="./styles/customerStile.css">
-    <title>Create new customer</title>
+    <link rel="stylesheet" href="./styles/booksStile.css">
+    <title>Add new book</title>
 </head>
 <body>
 
@@ -16,7 +16,7 @@
             <ul>
               <li><a href="/home">Home</a></li>
               <li><a href="/customerAdded">Add new customer </a></li>
-              <li><a href="">Add new book</a></li>
+              <li><a href="/bookAdded">Add new book</a></li>
               <li><a href="#">Loan book</a></li>
             </ul>
           </nav>
@@ -26,14 +26,15 @@
 
       <div class="container">
         <form >
-          <div class = "title-form"><h2>Add new cutomer </h2></div>
-          <div class="inpData">
-            <input type="text" name="" id="name" placeholder="NAME" required>
-            <input type="date" name="" id="date_Birth" required>
-            <input type="text" name="" id="address" placeholder="ADDRESS" required>
-            <input type="email" name="" id="email" placeholder="EMAIL" required>
-
-          </div>
+          <div class = "title-form"><h2>Add new book</h2></div>
+            <div class="inpData">
+              <input type="text"  id="name" placeholder="NAME">
+              <label for="publication_Date">Publication Date</label>
+              <input type="date"  id="publication_Date" placeholder="PUBLICATION DATE">
+              <input type="text" id="author" placeholder="AUTHOR">
+              <input type="text" name="" id="editorial" placeholder="EDITORIAL">
+              <input type="text" name="" id="loan_priece" placeholder="LOAN PRIECE">
+            </div>
           <div class="button">
             <button type="button" id = "button-send">ADD</button>
           </div>
@@ -44,14 +45,13 @@
       <div class="modal-container" id = "modal-container">
         <div class="modal">
           <h1>Ok!!</h1>
-          <p>customer added 
-            with successful</p>
+          <p>Book added with successful</p>
           <button id = "button-modal">continue</button>
         </div>
 
       </div>
       <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-      <script type="module" src="js/pCutomer.js"></script>
+      <script type="module" src="js/pbooks.js"></script>
 
 </body>
 </html>
