@@ -85,11 +85,10 @@ export const loanBook: RequestHandler = async (req, res) => {
     loan_delay_cost: loan_delay_cost,
   };
 
-  console.log(newLoan)
 
  let data = await addLoanDataBase(newLoan);
  return res.status(data.status).send(data);
-
+ 
 };
 
 

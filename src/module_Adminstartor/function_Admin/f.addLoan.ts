@@ -4,6 +4,7 @@ import { poolAdministrator } from "../../db/db";
 
 
 export const addLoanDataBase = async (loan: loan_Book) => {
+  
     try {
         if (
           !loan.id_Books ||
@@ -18,6 +19,7 @@ export const addLoanDataBase = async (loan: loan_Book) => {
             status: 404,
             status_Server: "error_Data_empty",
             message: "Error data empy!!!",
+            loan: loan
           };
         } else {
           await poolAdministrator.query(

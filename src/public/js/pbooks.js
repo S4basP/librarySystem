@@ -19,4 +19,8 @@ buttonContainerModal.addEventListener('click', () => {
 });
 
 
+buttonContainerModal.addEventListener('click', () => {
+    window.location.href = '/home';
+});
+
 

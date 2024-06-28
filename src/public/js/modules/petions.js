@@ -1,5 +1,6 @@
 
 import { modalContainer } from "./elementsDom.js";
+import { showModalPage } from "./functionGeneral.js";
 
 export const  getBooks =  async () => {
     let {data}= await axios({
@@ -67,4 +68,5 @@ export const addLoan = async ( loan )  => {
             loan_delay_cost: loan.loan_delay_cost 
         }
     });
+    showModalPage(data.status_Server);
 }
