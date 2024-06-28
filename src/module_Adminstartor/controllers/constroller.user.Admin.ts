@@ -6,11 +6,14 @@ import {
   loan_Book,
   Administrator,
 } from "../../typesForData/typeData";
-import { addAdminToDataBases, compareAdmin } from '../function_Admin/f.addedAdmin'
+import { addAdminToDataBases, compareAdmin, getIdAdministrator } from '../function_Admin/f.addedAdmin'
 import { addCustomerDataBase } from "../function_Admin/f.addCustomer";
 import { addBookDataBases } from "../function_Admin/f.addBooks";
 import { addLoanDataBase } from "../function_Admin/f.addLoan";
 import { showBooksDataBase } from "../function_Admin/seeData";
+import { cookieExpire } from "../config/config";
+import {DateTime} from 'luxon';
+import { getLoan_Price } from "../querys/querysAdmin";
 
 
 let data; 
@@ -62,13 +65,12 @@ export const createBooks: RequestHandler = async (req, res) => {
 };
 
 export const loanBook: RequestHandler = async (req, res) => {
+  let {token} = req.cookies; 
   const {
     id_Books,
     id_Customer,
-    id_Administartor: id_Administrator,
     delivery_Date,
     loan_Date,
-    loan_Payment,
     loan_delay_cost,
   } = req.body;
 
@@ -76,12 +78,14 @@ export const loanBook: RequestHandler = async (req, res) => {
     id_Loan: generateId(),
     id_Books: id_Books,
     id_Customer: id_Customer,
-    id_Administrator: id_Administrator,
+    id_Administrator: getIdAdministrator(token),
     delivery_Date: delivery_Date,
     loan_Date: loan_Date,
-    loan_Payment: loan_Payment,
+    loan_Payment: await getLoan_Price(id_Books),
     loan_delay_cost: loan_delay_cost,
   };
+
+  console.log(newLoan)
 
  let data = await addLoanDataBase(newLoan);
  return res.status(data.status).send(data);
@@ -91,8 +95,27 @@ export const loanBook: RequestHandler = async (req, res) => {
 
 export const loginAutenticationAdmin: RequestHandler = async ( req, res ) => {
   const { name, password } = req.body;
-   data = await compareAdmin( name, password );
-   return res.status(data.status).send(data);
+  data = await compareAdmin( name, password );
+
+  if(!data.user_Found){
+    return res.status(data.status).send({
+       status: data.status,
+       status_Server: data.status_Server,
+       user_Found: data.user_Found
+
+    })
+  } else {
+    return res
+    .status( data.status )
+    .cookie("token", data.token, {expires: cookieExpire})
+    .send({
+      status: data.status,
+      status_Server: data.status_Server,
+      user_Found: data.user_Found,
+ 
+    })
+  }
+ 
   
   }
  
@@ -101,4 +124,7 @@ export const showBooks: RequestHandler = async ( req , res ) => {
   console.log(data);
   return res.status(data.status).send(data);
 }
+
+
+
 

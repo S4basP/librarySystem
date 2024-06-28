@@ -20,6 +20,13 @@ import {
 
 } from './elementsDom.js';
 
+import {
+    inp_idBook,
+    inp_DDelivery,
+    inp_IdCustomer,
+    inp_loanDelayCost
+} from './elementsDom.js';
+
 
 export const cLogin = ( name, password ) => {
     name.value = '';
@@ -45,4 +52,13 @@ export const cBooks = () => {
     inpAuthorBook.value = "",
     inpEditorialBook.value = "",
     inpLoanPrieceBook.value = ""
+}
+
+
+export function cLoanBooks () {
+    inp_idBook.value = '';
+    inp_DDelivery.value = '';
+    inp_IdCustomer.value = '';
+    inp_loanDelayCost.value = '';
+
 }

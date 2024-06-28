@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="./styles/booksStile.css">
-    <title>Add new book</title>
+    <link rel="stylesheet" href="./styles/loanStyles.css">
+    <title>Loan Book</title>
 </head>
 <body>
 
@@ -26,15 +26,18 @@
 
       <div class="container">
         <form >
-          <div class = "title-form"><h2>Add new book</h2></div>
+          <div class = "title-form"><h2>Lend book</h2></div>
             <div class="inpData">
-              <input type="text"  id="name" placeholder="NAME">
-              <label for="publication_Date">Publication Date</label>
-              <input type="date"  id="publication_Date" placeholder="PUBLICATION DATE">
-              <input type="text" id="author" placeholder="AUTHOR">
-              <input type="text" name="" id="editorial" placeholder="EDITORIAL">
-              <input type="text" name="" id="loan_priece" placeholder="LOAN PRIECE">
-            </div>
+              <input type="text"  id="idBook" placeholder="Id of book">
+
+              <label for="date_Delivery">Book delivery date</label>
+              <input type="date" name="" id="date_Delivery">
+
+              <input type="text" name="" id="idCustomerLoan" placeholder="Id Customer">
+              
+              <input type="text" name="" id="loan_delay_cost" placeholder="Delay cost">
+
+                
           <div class="button">
             <button type="button" id = "button-send">ADD</button>
           </div>
@@ -51,7 +54,7 @@
 
       </div>
       <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-      <script type="module" src="js/pbooks.js"></script>
+      <script type="module" src="js/loanPage.js"></script>
 
 </body>
 </html>

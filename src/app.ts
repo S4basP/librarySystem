@@ -5,6 +5,8 @@ import indexRoutersClient from './module_Client/routers/routers.client';
 import pageRouter from './modulePage/routers/routerPage';
 import cors from 'cors';
 import path from 'path';
+import cookieParser from 'cookie-parser';
+
 //
 const app = express();
 
@@ -13,6 +15,7 @@ const app = express();
 app.use(morgan('dev'));
 app.use(cors());
 app.use(express.json());
+app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
 app.use(indexRouters);
 app.use(indexRoutersClient);

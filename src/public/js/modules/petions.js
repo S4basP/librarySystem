@@ -52,3 +52,19 @@ export const addBook = async ( book ) => {
     }
 
 };
+
+
+
+export const addLoan = async ( loan )  => {
+    let { data } = await axios ({
+        method: 'post',
+        url: 'http://localhost:3000/loanBook',
+        data: {
+            id_Books: loan.id_Books,
+            id_Customer: loan.id_Customer,
+            delivery_Date: loan.delivery_Date,
+            loan_Date: loan.loan_Date,
+            loan_delay_cost: loan.loan_delay_cost 
+        }
+    });
+}

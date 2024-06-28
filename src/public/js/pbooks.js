@@ -6,7 +6,7 @@ const buttonContainerModal = document.getElementById('button-modal');
 
 
 
-button.addEventListener('click', ( ) => {
+button.addEventListener('click', (  ) => {
     const book =  getInformtionBook();
     console.log(book);
     addBook(book);
